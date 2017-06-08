@@ -65,7 +65,7 @@ chapel_full_install() {
 
 chapel_test() {(
     chapel_folder_cd
-    chpl -o "chapel_test" example/hello4-datapar-dist.chpl
+    chpl -o "chapel_test" examples/hello4-datapar-dist.chpl
     echo 'Should print hello from 2 locales'
     ./chapel_test -nl 2
 )}
