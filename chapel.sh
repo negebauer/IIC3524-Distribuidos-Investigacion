@@ -70,6 +70,16 @@ chapel_test() {(
     ./chapel_test -nl 2
 )}
 
-chapel_build() {
+chapel_b() {
+  # Build
   chpl -o $1.out $1
+}
+
+chapel_br() {
+  # Build and run
+  params_full=($@)
+  if [[ -z $2 ]]; then params_full=($1 '-nl' '2'); fi
+  params="${params_full[@]:3}"
+  chapel_b $1
+  ./$1.out $params
 }
