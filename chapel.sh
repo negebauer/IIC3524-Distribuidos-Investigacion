@@ -11,24 +11,25 @@ chapel_binary_expand() {
   tar xzf $binary
 }
 
-chapel_set_env() {(
-    chapel_folder_cd
-    if [[ -z $chapel_hosts ]]; then
-      chapel_hosts="localhost tripio titan caleuche trauco makemake";
-      # localhost = hercules
-    fi
-    if [[ -z $CHPL_HOME ]]; then
-      export CHPL_HOME=$(pwd | sed 's/ /\\ /g')
-      source util/quickstart/setchplenv.bash
-    fi
-    # export CHPL_COMM=gasnet
-    if [[ -z $chapel_comm ]]; then
-      chapel_comm=ibv;
-    fi
-    export CHPL_COMM=$chapel_comm
-    export GASNET_SPAWNFN=S # Use SSH
-    export GASNET_SSH_SERVERS=$chapel_hosts
-)}
+chapel_set_env() {
+  chapel_folder_cd
+  if [[ -z $chapel_hosts ]]; then
+    chapel_hosts="localhost tripio titan caleuche trauco makemake";
+    # localhost = hercules
+  fi
+  if [[ -z $CHPL_HOME ]]; then
+    export CHPL_HOME=$(pwd | sed 's/ /\\ /g')
+    source util/quickstart/setchplenv.bash
+  fi
+  # export CHPL_COMM=gasnet
+  if [[ -z $chapel_comm ]]; then
+    chapel_comm=ibv;
+  fi
+  export CHPL_COMM=$chapel_comm
+  export GASNET_SPAWNFN=S # Use SSH
+  export GASNET_SSH_SERVERS=$chapel_hosts
+  cd -- "$(dirname "$BASH_SOURCE")"
+}
 
 chapel_folder_cd() {
   cd -- "$(dirname "$BASH_SOURCE")"
