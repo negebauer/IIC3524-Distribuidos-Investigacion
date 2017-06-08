@@ -6,6 +6,7 @@ test/out/*.png
 atom.command
 chapel-1.15.0
 chapel-1.15.0.tar.gz
+continuos_deploy.sh
 deploy.sh
 exclude.txt
 
