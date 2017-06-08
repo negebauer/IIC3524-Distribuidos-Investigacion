@@ -16,7 +16,7 @@ for i in 1..numLocales-1 do
 current = head;
 
 while current {
-  writeln("node with data = ", current.data, " on locale ", current.locale.id);
+  writeln("node with data = ", current.data, " on locale ", current.locale.name);
   current = current.next;
 }
 
@@ -26,7 +26,7 @@ current = head;
 
 while current {
   on current {
-    writeln("node with data = ", current.data, " on locale ", here.id);
+    writeln("node with data = ", current.data, " on locale ", here.name);
     current = current.next;
   }
 }
