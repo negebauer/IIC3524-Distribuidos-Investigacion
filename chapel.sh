@@ -69,3 +69,7 @@ chapel_test() {(
     echo 'Should print hello from 2 locales'
     ./chapel_test -nl 2
 )}
+
+chapel_build() {
+  chpl -o $1.out $1
+}
