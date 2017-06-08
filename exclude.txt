@@ -1,4 +1,5 @@
 .git
+**/.chpl.out
 **/.gitignore
 **/.DS_Store
 test/out/*.png
