@@ -37,13 +37,13 @@ chapel_folder_cd() {
 
 chapel_binary_build() {(
     echo 'Building'
-    chapel_binary_folder_cd
+    chapel_folder_cd
     make
 )}
 
 chapel_binary_clean() {(
     echo 'Cleaning'
-    chapel_binary_folder_cd
+    chapel_folder_cd
     make clean
 )}
 
@@ -63,7 +63,7 @@ chapel_full_install() {
 }
 
 chapel_test() {(
-    chapel_binary_folder_cd
+    chapel_folder_cd
     chpl -o "chapel_test" example/hello4-datapar-dist.chpl
     echo 'Should print hello from 2 locales'
     ./chapel_test -nl 2
