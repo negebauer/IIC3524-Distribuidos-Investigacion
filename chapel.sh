@@ -21,9 +21,9 @@ chapel_set_env() {
     export CHPL_HOME=$(pwd | sed 's/ /\\ /g')
     source util/quickstart/setchplenv.bash
   fi
-  # export CHPL_COMM=gasnet
   if [[ -z $chapel_comm ]]; then
-    chapel_comm=ibv;
+    # chapel_comm=ibv
+    chapel_comm=gasnet
   fi
   export CHPL_COMM=$chapel_comm
   export GASNET_SPAWNFN=S # Use SSH
