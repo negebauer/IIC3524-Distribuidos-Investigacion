@@ -8,3 +8,11 @@ chapel-1.15.0
 chapel-1.15.0.tar.gz
 deploy.sh
 exclude.txt
+
+# Latex
+**.aux
+**.fdb_latexmk
+**.fls
+**.log
+**.out
+**.synctex.gz
