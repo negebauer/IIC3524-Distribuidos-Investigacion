@@ -1,0 +1,7 @@
+.git
+**/.gitignore
+**/.DS_Store
+test/out/*.png
+atom.command
+deploy.sh
+exclude.txt
