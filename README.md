@@ -35,8 +35,10 @@ chapel_set_env
 chapel_binary_build
 
 # Probamos que haya compilado
-chapel_test               # (con 2 hosts)
-chapel_test -nl <nodes>   # (con <nodes> hosts)
+chapel_test
+chapel_test -nl <nodes> --numTasks=<tasks>
+# <tasks> número de tasks (default 3)
+# <nodes> número de nodos (default 3)
 
 # Limpiar compilación
 # chapel_binary_clear
