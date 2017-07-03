@@ -16,7 +16,6 @@ chapel_set_env() {
   if [[ -z $chapel_hosts ]]; then
     chapel_hosts="tripio trauco caleuche"
     # chapel_hosts="hercules tripio titan caleuche trauco makemake";
-    # localhost = tripio
   fi
   if [[ -z $CHPL_HOME ]]; then
     export CHPL_HOME=$(pwd | sed 's/ /\\ /g')
