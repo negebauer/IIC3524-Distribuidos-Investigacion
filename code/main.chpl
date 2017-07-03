@@ -74,20 +74,4 @@ forall destination in DestinationSpace {
   writeln(route);
 }
 
-/*coforall (loc, i) in zip(Locales, 0..) {
-  coforall status in wsp.status {
-    if (!status.finished && status.node == -1) {
-      status.node = i;
-      on loc {
-        const route = new Route();
-        route.advance(wsp, status.destination);
-        route.dfs(wsp);
-        status.finished = true;
-        status.cost = route.cost;
-        status.cities = route.cities;
-      }
-    }
-  }
-}*/
-
 for s in wsp.status do writeln(s);
