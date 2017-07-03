@@ -29,12 +29,12 @@ chapel_binary_expand
 # Seteamos variables de entorno
 chapel_set_env
 
-# Limpiamos compilacion anterior
-# chapel_binary_clear
-
 # Compilamos chapel
 chapel_binary_build
 
 # Probamos que haya compilado (con 2 hosts)
 chapel_test
+
+# Limpiar compilación
+# chapel_binary_clear
 ```
