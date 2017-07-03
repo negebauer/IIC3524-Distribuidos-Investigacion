@@ -1,6 +1,5 @@
 use CyclicDist;
 
-config const cores=4;
 config const input='./test/t3.txt';
 
 const file = open(input, iomode.r);
