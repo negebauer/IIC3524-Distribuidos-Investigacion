@@ -34,12 +34,16 @@ class Route {
     visited[destination] = false;
   }
 
-  proc dfs(wsp: WSP) {
+  proc updateCost(wsp: WSP) {
+    if cost < wsp.cost {
+      wsp.cost = cost;
+      wsp.cities = cities;
+    }
+  }
+
+  proc dfs(wsp: WSP): void {
     if visits == wsp.size {
-      if cost < wsp.cost {
-        wsp.cost = cost;
-        wsp.cities = cities;
-      }
+      updateCost(wsp);
       return;
     }
     if cost >= wsp.cost then return;
@@ -73,9 +77,11 @@ file.close();
 
 const DestinationSpace = {1..size-1} dmapped Cyclic(startIdx=1);
 forall destination in DestinationSpace {
+  writeln('task ', here.id, ' destination ', destination);
   const route = new Route();
   route.advance(wsp, destination);
   route.dfs(wsp);
+  writeln('task ', here.id, ' destination ', destination, ' finished');
 }
 
 writeln('wsp cost');
