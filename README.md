@@ -74,5 +74,5 @@ Para usar chapel a mano se hace de la siguiente manera
 
 ```bash
 chpl -o <out> <in>
-./<out> -nl ><nodos>
+./<out> -nl <nodos>
 ```
