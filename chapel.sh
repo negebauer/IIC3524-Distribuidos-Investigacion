@@ -80,7 +80,7 @@ chapel_b() {
 chapel_br() {
   # Build and run
   params_full=($@)
-  if [[ -z $2 ]]; then params_full=($1 '-nl' '2'); fi
+  if [[ -z $2 ]]; then params_full=($1 '-nl' '3'); fi
   params="${params_full[@]:1}"
   chapel_b $1
   ./$1.out $params
