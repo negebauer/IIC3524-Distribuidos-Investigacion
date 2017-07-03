@@ -75,16 +75,6 @@ for i in 0..size-1 {
 }
 file.close();
 
-// Serial
-for destination in 1..size-1 {
-  writeln('task ', here.id, ' destination ', destination);
-  const route = new Route();
-  route.advance(costs, destination);
-  route.dfs(wsp, costs);
-  writeln('task ', here.id, ' destination ', destination, ' finished');
-}
-
-// Parallel
 const DestinationSpace = {1..size-1} dmapped Cyclic(startIdx=1);
 forall destination in DestinationSpace {
   const costsLocal = costs;
