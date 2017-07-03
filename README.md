@@ -44,7 +44,7 @@ chapel_test -nl <nodes> --numTasks=<tasks>
 # chapel_binary_clear
 ```
 
-## Uso
+## Compilar y correr programas
 
 Primero cargamos los métodos de ayuda y cargamos chapel como executable
 
