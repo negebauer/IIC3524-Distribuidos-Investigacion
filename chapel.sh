@@ -14,8 +14,9 @@ chapel_binary_expand() {
 chapel_set_env() {
   chapel_folder_cd
   if [[ -z $chapel_hosts ]]; then
-    chapel_hosts="localhost tripio titan caleuche trauco makemake";
-    # localhost = hercules
+    chapel_hosts="tripio trauco caleuche"
+    # chapel_hosts="hercules tripio titan caleuche trauco makemake";
+    # localhost = tripio
   fi
   if [[ -z $CHPL_HOME ]]; then
     export CHPL_HOME=$(pwd | sed 's/ /\\ /g')
@@ -28,6 +29,7 @@ chapel_set_env() {
   export CHPL_COMM=$chapel_comm
   export GASNET_SPAWNFN=S # Use SSH
   export GASNET_SSH_SERVERS=$chapel_hosts
+  cd ..
 }
 
 chapel_folder_cd() {
@@ -35,24 +37,26 @@ chapel_folder_cd() {
   cd chapel-1.15.0
 }
 
-chapel_binary_build() {(
-    echo 'Building'
-    chapel_folder_cd
-    make
-)}
+chapel_binary_build() {
+  echo 'Building'
+  chapel_folder_cd
+  make
+  cd ..
+}
 
 chapel_binary_clean() {(
     echo 'Cleaning'
     chapel_folder_cd
     make clean
+    cd ..
 )}
 
-chapel_binary_clear() {(
-    chapel_binary_clean
-    chapel_folder_cd
-    cd ../
-    rm -rf chapel-1.15.0
-)}
+chapel_binary_clear() {
+  chapel_binary_clean
+  chapel_folder_cd
+  cd ..
+  rm -rf chapel-1.15.0
+}
 
 chapel_full_install() {
   chapel_binary_clear
@@ -62,12 +66,11 @@ chapel_full_install() {
   chapel_binary_build
 }
 
-chapel_test() {(
-    chapel_folder_cd
-    chpl -o "chapel_test" examples/hello4-datapar-dist.chpl
-    echo 'Should print hello from 2 locales'
-    ./chapel_test -nl 2
-)}
+chapel_test() {
+  test="test.chpl"
+  echo "Building and running $test"
+  chapel_br $test $@
+}
 
 chapel_b() {
   # Build

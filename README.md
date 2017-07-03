@@ -34,8 +34,9 @@ chapel_set_env
 # Compilamos chapel
 chapel_binary_build
 
-# Probamos que haya compilado (con 2 hosts)
-chapel_test
+# Probamos que haya compilado
+chapel_test               # (con 2 hosts)
+chapel_test -nl <nodes>   # (con <nodes> hosts)
 
 # Limpiar compilación
 # chapel_binary_clear
