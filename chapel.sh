@@ -28,7 +28,6 @@ chapel_set_env() {
   export CHPL_COMM=$chapel_comm
   export GASNET_SPAWNFN=S # Use SSH
   export GASNET_SSH_SERVERS=$chapel_hosts
-  cd ..
 }
 
 chapel_folder_cd() {
