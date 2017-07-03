@@ -1,5 +1,7 @@
 # Investigación HPC - Chapel
 
+## Instalación
+
 Para poder usar chapel lo primero que tenemos que hacer es cargar los métodos de ayuda
 ```bash
 source ./chapel.sh
@@ -37,4 +39,21 @@ chapel_test
 
 # Limpiar compilación
 # chapel_binary_clear
+```
+
+## Uso
+
+Una vez que cargamos los métodos de ayuda basta con usar los siguientes comandos para correr programas
+
+```bash
+chapel_b <programa>
+# Compila el <programa> en <programa>.out
+
+chapel_br <programa>
+# Compila y corre <programa> en 2 nodos
+# Los nodos se definen con la variable de entorno
+# GASNET_SSH_SERVERS
+
+chapel_br <programa> -nl <nodos>
+# Compila y corre <programa> en la cantidad de nodos <nodos>
 ```
