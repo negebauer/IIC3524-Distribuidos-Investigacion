@@ -22,31 +22,43 @@ class Route {
   }
 
   proc advance(wsp: WSP, destination: int) {
-    visits +=1 ;
     cities[visits] = destination;
     visited[destination] = true;
-    cost += wsp.costs[cities[visits - 1], cities[visits]];
+    cost += wsp.costs[cities[visits - 1], destination];
+    visits +=1 ;
+  }
+
+  proc back(wsp: WSP) {
+    visits -= 1;
+    const destination = cities[visits];
+    cost -= wsp.costs[cities[visits - 1], destination];
+    visited[destination] = false;
   }
 
   proc dfs(wsp: WSP) {
-    return;
+    if visits == wsp.size {
+      if cost < wsp.cost {
+        wsp.cost = cost;
+        wsp.cities = cities;
+      }
+      return;
+    }
+    if cost >= wsp.cost then return;
+    for destination in 1..wsp.size-1 {
+      if !visited(destination) {
+        advance(wsp, destination);
+        dfs(wsp);
+        back(wsp);
+      }
+    }
   }
-}
-
-class Status {
-  var destination: int;
-  var node: int;
-  var finished: bool;
-  var cost: int;
-  var cities: [0..size-1] int;
 }
 
 class WSP {
   const size: int;
-  var cost: int;
+  var cost = 10000000;
   var cities: [0..size - 1] int;
   var costs: [0..size-1, 0..size-1] int;
-  var status: [1..size-1] Status;
 }
 
 const wsp = new WSP(size);
@@ -60,18 +72,14 @@ for i in 0..size-1 {
 }
 file.close();
 
-for destination in 1..size-1 {
-  wsp.status[destination] = new Status(destination, -1);
-}
-
 const DestinationSpace = {1..size-1} dmapped Cyclic(startIdx=1);
-
 forall destination in DestinationSpace {
-  const status = wsp.status[destination];
-  status.node = here.id;
   const route = new Route();
   route.advance(wsp, destination);
-  writeln(route);
+  route.dfs(wsp);
 }
 
-for s in wsp.status do writeln(s);
+writeln('wsp cost');
+writeln(wsp.cost);
+writeln('wsp cities');
+writeln(wsp.cities);
