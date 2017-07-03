@@ -13,7 +13,10 @@ class WSP {
 }
 
 class Route {
-  var cities: [1..size-1] int;
+  var cities: [0..size-1] int;
+  var visited: [0..size-1] int;
+  var size: int;
+  var cost: int;
 }
 
 const wsp = new WSP(size);
