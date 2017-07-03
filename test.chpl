@@ -1,4 +1,10 @@
-for loc in Locales do
-  forall i in 0..3 do
-    writeln("Hello iteration ", i, " of ", 3,
-          " locale ", here.id, " of ", numLocales, ")");
+// Iterate over all locales
+coforall loc in Locales {
+  // Move execution to locale
+  on loc {
+    // Span 4 tasks
+    coforall tid in 0..3 {
+      writeln("Hello task ", tid, " locale ", loc.name, " ", here.id, "/", numLocales);
+    }
+  }
+}
