@@ -43,7 +43,16 @@ chapel_test
 
 ## Uso
 
-Una vez que cargamos los métodos de ayuda basta con usar los siguientes comandos para correr programas
+Primero cargamos los métodos de ayuda y cargamos chapel como executable
+
+```bash
+source ./chapel.sh
+# chapel_comm="comunicacion"
+# chapel_hosts="host1 host2"
+chapel_set_env
+```
+
+Y ahora podemos correr los programas usando los siguientes métodos
 
 ```bash
 chapel_b <programa>
@@ -56,4 +65,11 @@ chapel_br <programa>
 
 chapel_br <programa> -nl <nodos>
 # Compila y corre <programa> en la cantidad de nodos <nodos>
+```
+
+Para usar chapel a mano se hace de la siguiente manera
+
+```bash
+chpl -o <out> <in>
+./<out> -nl ><nodos>
 ```
