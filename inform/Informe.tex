@@ -88,51 +88,64 @@
  \bf {\Large Propuesta investigación HPC}
 
  \vspace{0.2cm}
- \bf 23 de junio de 2017
+ \bf 4 de julio de 2017
 
  \vspace{0.2cm}
  \bf Nicolás Gebauer {-} 13634941
 
  \vspace{0.2cm}
- \bf \href{https://github.com/negebauer}{\color{blue!60} @negebauer} {-} \href{https://github.com/negebauer/IIC3524-Investigacion}{\color{blue!60}repo Investigación}
+ \bf \href{https://github.com/negebauer}{\color{blue!60}@negebauer} {-} \href{https://github.com/negebauer/IIC3524-Investigacion}{\color{blue!60}repo Investigación}
  \noindent\rule{16cm}{0.05pt}
 \end{center}
 
-\subsection*{Introducción}
-Lorem ipsum
+\subsection*{Problema}
+Cada día se tienen más datos disponibles con los cuales uno puede realizar cómputos interesantes. Cada día se tiene computadores más poderosos y juntando varios de ellos se tienen \textit{clusters}. En este contexto se hace importante poder aprovechar estas plataformas \textit{HPC}.\\
+Hoy esto es posible con lenguajes como \textit{C} y \textit{frameworks} adicionales como \textit{OpenMP} y \textit{MPI} que permiten aprovechar los recursos disponibles para hacer cómputos paralelos.\\
 
-\begin{lstlisting}[language=Python]
-import numpy as np
+\textit{OpenMP} permite trabajar en distintas tarea paralelas, aprovechando las únidades de cómputo que tiene disponible la máquina que se utiliza.\\
+\textit{MPI} permite además de trabajar usando los varios \textit{cores} disponibles en una máquina utilizar distintos nodos, es decir, realizar cómputos en varios computadores al mismo tiempo de manera paralela. Esto permite, por ejemplo, trabajar con grandes \textit{sets} de datos para obtener resultados.\\
+Otras herramientas como \textit{CUDA} y \textit{OpenCl} permiten usar más recursos de los sistemas, como sus tarjetas \textit{GPU} para acelerar los cómputos.\\
 
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
+Ante tantas herramientas, el campo del desarrollo de programas \textit{HPC} tiene una barrera de entrada muy grande. Primero se necesita ser compentente en lenguajes como \textit{C} que no son lenguajes modernos, es decir, no tienen una alta prioridad en el aprendizaje de los programadoresde hoy. Luego uno debe aprender sobre las distintas herramientas para poder aprovecharlas.
 
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1)
+% \pagebreak
+\subsection*{Solución}
+Para poder atacar esta problemática la empresa \href{http://www.cray.com}{\color{blue!60}Cray} decidió crear un nuevo lenguaje, llamado \textit{Chapel}. El objetivo principal de \textit{Chapel} es acercar la programación orientada a \textit{HPC} a más desarrolladores. Algunos de los objetivos de \textit{Chapel} que es importante destacar.
 
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
+\begin{itemize}
+ \item Un única herramienta para \textit{HPC}
+ \item Lenguaje alto y bajo nivel
+ \item Lenguaje moderno
+\end{itemize}
 
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
+El primer punto hace referencia a que el lenguaje engloba muchas formas de hacer trabajos paralelos en varios nodos que actualmente requieren distintas herramientas. Esto facilita el desarrollo ya que solo es necesario aprender a utilizar un nuevo lenguaje.\\
 
-                VT = np.zeros((n*m,1), int)
+El segundo destaca la importancia de que el lenguaje facilita el comenzar a realizar trabajos en paralelos a través de directivas de alto nivel. Esto reduce la barrera de entrada para quienes son nuevos en \textit{HPC}. A la vez permite un manejo a bajo nivel, lo que le permite a quienes tienen conocimientos más avanzados poder trabajar más cercano a la máquina, por ejemplo, optimizando de mejor forma el uso de memoria.
 
-    return M
+Como ejemplo, en \textit{Chapel} correr un proceso en varios nodos es tan simple como ejecutar:
+
+\begin{lstlisting}[language=Chapel]
+// Un task para cada local (nodo) disponible
+coforall loc in Locales {
+	// Movemos el computo al local
+	on loc {
+		// Imprimimos un mensaje
+		writeln('Hola desde local ', here.id);
+			// here hace referencia al local que esta corriendo el codigo
+	}
+}
 \end{lstlisting}
 
-\lstinputlisting[language=Python, firstline=2, lastline=12]{../code/main.chpl}
+El tercer punto se refiere a que el lenguaje fue escrito tomando inspiración de lenguajes más moderno como \textit{Python} y \textit{Java}, lo que hace que nuevos desarrolladores se sientan más cómodos al interactuar con el. También tomaron inspiración de \textit{C} para que desarrolladores veteranos no queden excluidos. Por ejemplo, se puede programar con \textit{OOP} si uno lo desea.
+
+% \pagebreak
+\subsection*{Desarrollo}
+El objetivo de este trabajo es, en pocas palabras, hacer una prueba del lenguaje \textit{Chapel}. Para ello se aprovecha la \href{https://github.com/negebauer/IIC3524-T2}{\color{blue!60}Tarea 2} que se realizó en el curso con \textit{MPI}. El código resultante puede verse en el siguiente \href{https://github.com/negebauer/IIC3524-Investigacion}{\color{blue!60}repositorio de github}, Junto con instrucciones sobre como activar chapel, configurar algunas variables de entorno (como los \textit{hosts} a utilizar), el comando \verb|chpl| para compilar programas de chapel y como correrlos.
+
+% \pagebreak
+\subsection*{Referencias}
+Chapel chapter, Bradford L. Chamberlain, \textit{Programming Models for Parallel Computing}, edited by Pavan Balaji, published by MIT Press, November 2015. Disponible en \href{http://chapel.cray.com/publications/PMfPC-Chapel.pdf}{\color{blue!60}http://chapel.cray.com/publications/PMfPC-Chapel.pdf}
+
+%\lstinputlisting[language=Python, firstline=2, lastline=12]{../code/main.chpl}
 
 \end{document}

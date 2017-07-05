@@ -2,7 +2,9 @@
 
 ## Informe
 
-El informe del trabajo de información se encuentra en [`./code/Informe.pdf`](./code/Informe.pdf)
+El informe del trabajo de investigación se encuentra en [`inform/Informe.pdf`](inform/Informe.pdf)  
+El código utilizado se encuentra en la carpeta [`code`](code). Este está basado en el código de la [Tarea 2](https://github.com/negebauer/IIC3524-T2)  
+Información sobre como usar chapel se encuentra en los puntos siguientes
 
 ## Instalación
 
