@@ -1,5 +1,9 @@
 # Investigación HPC - Chapel
 
+## Informe
+
+El informe del trabajo de información se encuentra en [`./code/Informe.pdf`](./code/Informe.pdf)
+
 ## Instalación
 
 Para poder usar chapel lo primero que tenemos que hacer es cargar los métodos de ayuda
