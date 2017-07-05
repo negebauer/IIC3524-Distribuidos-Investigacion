@@ -1,0 +1,9 @@
+# main.chpl test/t3.txt
+real	1m43.229s
+user	0m0.004s
+sys	0m0.016s
+
+# main2.chpl test/t3.txt
+real	0m9.728s
+user	0m0.012s
+sys	0m0.016s
